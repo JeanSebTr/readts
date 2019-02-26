@@ -50,7 +50,7 @@ export class TypeSpec {
 
 	private parseEnum(type: ts.Type) {
 		this.name = type.flags & ts.TypeFlags.NumberLiteral ? 'number' : 'string';
-		this.value = (<ts.LiteralType>type).value;
+		this.value = (<ts.LiteralType>type).value as any;
 	}
 
 	private parseClass(type: ts.Type, parser: readts.Parser) {
