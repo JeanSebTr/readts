@@ -11,10 +11,11 @@ import { SymbolSpec } from './Parser';
 export class SignatureSpec {
 	/** @ignore internal use. */
 
-	constructor(pos: readts.SourcePos | undefined, returnType: readts.TypeSpec, doc: string) {
+	constructor(pos: readts.SourcePos | undefined, returnType: readts.TypeSpec, doc: string, tags: ts.JSDocTagInfo[]) {
 		this.pos = pos;
 		this.returnType = returnType;
 		if(doc) this.doc = doc;
+		if(tags) this.tags = tags;
 	}
 
 	/** Add a new parameter and type. @ignore internal use. */
@@ -30,4 +31,5 @@ export class SignatureSpec {
 	returnType: readts.TypeSpec;
 	/** JSDoc comment. */
 	doc: string;
+	tags?: ts.JSDocTagInfo[];
 }

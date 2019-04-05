@@ -122,7 +122,7 @@ export class Parser {
 	}
 
 	private parseSource(source: ts.SourceFile) {
-		const symbol = this.checker.getSymbolAtLocation(source);
+		const symbol = this.checker.getSymbolAtLocation(source) || (source as any).symbol;
 		if(!symbol || !symbol.exports) return;
 
 		const exportTbl = symbol.exports;
@@ -374,11 +374,12 @@ export class Parser {
 		const declaration = signature.getDeclaration();
 
 		if(declaration) pos = this.parsePos(declaration);
-
+		
 		const signatureSpec = new readts.SignatureSpec(
 			pos,
 			this.parseType(signature.getReturnType()),
-			this.parseComment(signature)
+			this.parseComment(signature),
+			signature.getJsDocTags(),
 		);
 
 		for(let param of signature.parameters) {

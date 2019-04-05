@@ -14,6 +14,7 @@ export class FunctionSpec {
 	constructor(spec?: SymbolSpec) {
 		if(spec) {
 			this.name = spec.name;
+			this.symbol = spec.symbol;
 		}
 	}
 
@@ -27,4 +28,6 @@ export class FunctionSpec {
 	name?: string;
 	/** List of signatures, one for each overload. */
 	signatureList: readts.SignatureSpec[] = [];
+
+	symbol?: ts.Symbol;
 }
