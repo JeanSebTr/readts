@@ -283,6 +283,8 @@ export class Parser {
 				classSpec.addProperty(this.parseIdentifier(spec, !!(symbolFlags & ts.SymbolFlags.Optional)));
 			} else if(spec.declaration && ts.isIndexSignatureDeclaration(spec.declaration)) {
 				classSpec.index = this.parseIndex(spec);
+			} else if(spec.declaration && ts.isCallSignatureDeclaration(spec.declaration)) {
+				classSpec.addMethod(this.parseCallSignature(spec));
 			}
 		}
 
@@ -332,6 +334,39 @@ export class Parser {
 			}
 		}
 
+		return(funcSpec);
+	}
+
+	private parseCallSignature(spec: SymbolSpec) {
+		const funcSpec = new readts.FunctionSpec(spec);
+
+		let pos: SourcePos | undefined;
+		const declaration = spec.declaration as ts.CallSignatureDeclaration;
+
+		if(declaration) pos = this.parsePos(declaration);
+
+		const signatureSpec = new readts.SignatureSpec(
+			pos,
+			this.parseType(this.checker.getTypeAtLocation(declaration.type!)),
+			this.parseComment((<any>declaration).symbol),
+			[],
+		);
+
+		for(let param of declaration.parameters) {
+			// TODO: handle call signature with params
+			console.warn("Param of callSignature", param);
+			throw new Error("TODO: handle call signature with params");
+			// const spec = this.parseSymbol(param);
+
+			// signatureSpec.addParam(
+			// 	this.parseIdentifier(
+			// 		spec,
+			// 		this.checker.isOptionalParameter(spec.declaration as ts.ParameterDeclaration)
+			// 	)
+			// );
+		}
+
+		funcSpec.addSignature(signatureSpec);
 		return(funcSpec);
 	}
 
