@@ -264,6 +264,13 @@ export class Parser {
 			}
 		}
 
+		const decl = spec.declaration;
+		if(decl && decl.decorators) {
+			for(const decorator of decl.decorators) {
+				classSpec.addDecorator(this.parseDecorator(decorator));
+			}
+		}
+
 		const memberTbl = spec.symbol.members;
 
 		for(let key of this.getKeys(memberTbl)) {
@@ -337,6 +344,10 @@ export class Parser {
 		return(funcSpec);
 	}
 
+	private parseDecorator(decorator: ts.Decorator) {
+		return (decorator.expression as ts.CallExpression).expression.getText();
+	}
+
 	private parseCallSignature(spec: SymbolSpec) {
 		const funcSpec = new readts.FunctionSpec(spec);
 
@@ -398,6 +409,13 @@ export class Parser {
 		const varSpec = (
 			new readts.IdentifierSpec(spec, spec.type && this.parseType(spec.type), optional)
 		);
+
+		const decl = spec.declaration;
+		if(decl && decl.decorators) {
+			for(const decorator of decl.decorators) {
+				varSpec.addDecorator(this.parseDecorator(decorator));
+			}
+		}
 
 		return(varSpec);
 	}

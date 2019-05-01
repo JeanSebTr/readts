@@ -21,6 +21,12 @@ export class IdentifierSpec {
 		if(spec.doc) this.doc = spec.doc;
 	}
 
+	addDecorator(decorator: string) {
+		if(!this.decoratorList) this.decoratorList = [];
+
+		this.decoratorList.push(decorator);
+	}
+
 	/** Identifier name. */
 	name: string;
 	pos?: readts.SourcePos;
@@ -28,4 +34,5 @@ export class IdentifierSpec {
 	value?: any;
 	/** JSDoc comment. */
 	doc?: string;
+	decoratorList: string[];
 }

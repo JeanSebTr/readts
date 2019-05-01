@@ -28,6 +28,12 @@ export class ClassSpec {
 		this.construct.addSignature(spec);
 	}
 
+	addDecorator(spec: string) {
+		if(!this.decoratorList) this.decoratorList = [];
+
+		this.decoratorList.push(spec);
+	}
+
 	/** Add method. @ignore internal use. */
 
 	addMethod(spec: readts.FunctionSpec) {
@@ -63,6 +69,7 @@ export class ClassSpec {
 	index: readts.IndexSpec;
 	/** Public methods. */
 	methodList: readts.FunctionSpec[];
+	decoratorList: string[];
 	/** Public properties. */
 	propertyList: readts.IdentifierSpec[];
 	/** Class extends */
