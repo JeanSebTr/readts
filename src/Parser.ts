@@ -367,17 +367,14 @@ export class Parser {
 		);
 
 		for(let param of declaration.parameters) {
-			// TODO: handle call signature with params
-			console.warn("Param of callSignature", param);
-			throw new Error("TODO: handle call signature with params");
-			// const spec = this.parseSymbol(param);
+			const spec = this.parseSymbol((param as any).symbol);
 
-			// signatureSpec.addParam(
-			// 	this.parseIdentifier(
-			// 		spec,
-			// 		this.checker.isOptionalParameter(spec.declaration as ts.ParameterDeclaration)
-			// 	)
-			// );
+			signatureSpec.addParam(
+				this.parseIdentifier(
+					spec,
+					this.checker.isOptionalParameter(spec.declaration as ts.ParameterDeclaration)
+				)
+			);
 		}
 
 		funcSpec.addSignature(signatureSpec);
