@@ -345,7 +345,10 @@ export class Parser {
 	}
 
 	private parseDecorator(decorator: ts.Decorator) {
-		return (decorator.expression as ts.CallExpression).expression.getText();
+		if(decorator.expression.kind === ts.SyntaxKind.CallExpression) {
+			return (decorator.expression as ts.CallExpression).expression.getText();
+		}
+		return decorator.expression.getText();
 	}
 
 	private parseCallSignature(spec: SymbolSpec) {
