@@ -88,7 +88,15 @@ export class Parser {
 	/** Get or change reference for a symbol. @ignore internal use. */
 
 	getRef(symbol: ts.Symbol, ref?: RefSpec) {
-		const name = symbol.getName();
+		// Resolve aliases.
+		while(1) {
+			const symbolFlags = symbol.getFlags();
+
+			if(symbolFlags & ts.SymbolFlags.Alias) {
+				symbol = this.checker.getAliasedSymbol(symbol);
+			} else break;
+		}
+		const name = this.checker.getFullyQualifiedName(symbol);
 		let symbolList = this.symbolTbl[name];
 
 		if(!ref) ref = {};
