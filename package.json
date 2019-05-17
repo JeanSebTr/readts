@@ -1,5 +1,5 @@
 {
-  "name": "readts",
+  "name": "@snipcart/readts",
   "version": "0.3.0",
   "description": "TypeScript exported definitions parser",
   "main": "dist/index.js",
