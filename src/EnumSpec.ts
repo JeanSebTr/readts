@@ -34,4 +34,6 @@ export class EnumSpec {
 	memberList: readts.IdentifierSpec[];
 	/** JSDoc comment. */
 	doc: string;
+	/** JSDoc tags */
+	docTags: ts.JSDocTagInfo[];
 }

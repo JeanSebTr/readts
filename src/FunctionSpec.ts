@@ -30,4 +30,6 @@ export class FunctionSpec {
 	signatureList: readts.SignatureSpec[] = [];
 
 	symbol?: ts.Symbol;
+	/** JSDoc tags */
+	docTags: ts.JSDocTagInfo[];
 }

@@ -4,6 +4,7 @@
 import * as path from 'path';
 import * as ts from 'typescript';
 import * as readts from './index';
+import { ClassSpec } from './ClassSpec';
 
 const hasExports = (ts.SymbolFlags.Class | ts.SymbolFlags.Enum | ts.SymbolFlags.Module | ts.SymbolFlags.Variable);
 
@@ -257,6 +258,7 @@ export class Parser {
 			}
 		}
 
+		enumSpec.docTags = spec.symbol.getJsDocTags()
 		return(enumSpec);
 	}
 
@@ -337,6 +339,7 @@ export class Parser {
 			}
 		}
 
+		classSpec.docTags = spec.symbol.getJsDocTags();
 		return(classSpec);
 	}
 
@@ -349,6 +352,7 @@ export class Parser {
 			}
 		}
 
+		funcSpec.docTags = spec.symbol.getJsDocTags();
 		return(funcSpec);
 	}
 

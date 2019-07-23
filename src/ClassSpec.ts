@@ -78,4 +78,6 @@ export class ClassSpec {
 	exports: readts.ModuleSpec;
 	/** JSDoc comment. */
 	doc: string;
+	/** JSDoc tags */
+	docTags: ts.JSDocTagInfo[];
 }
