@@ -1,6 +1,6 @@
 {
   "name": "@snipcart/readts",
-  "version": "3.0.0-develop5",
+  "version": "3.0.0-develop6",
   "description": "TypeScript exported definitions parser",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
